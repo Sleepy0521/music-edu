@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/music-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/music-consumer-8300" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/music-dashboard-9000" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/music-eureka-7000" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/music-provider-8000" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/music-zuul-8600" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/musicc-consumer-80" charset="UTF-8" />
+  </component>
+</project>
