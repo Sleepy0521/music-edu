@@ -3,7 +3,7 @@
 var config = {
 
     //接口地址
-    serverUrl: window.location.protocol + "//" + window.location.host,
+    serverUrl: window.location.protocol + "//" + window.location.host+"/degradeApi",
 
     //接口应用
     serverApp: 'pasture-api'

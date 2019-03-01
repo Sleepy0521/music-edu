@@ -1,7 +1,9 @@
 package com.music.service;
 
+import com.music.service.impl.TestClientServiceFallbackFactory;
 import com.music.utils.Msg;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author zzyy
  * @date 2018年4月21日
  */
-@FeignClient(value = "api",fallbackFactory=TestClientServiceFallbackFactory.class)
+@FeignClient(value = "music-provider",fallbackFactory= TestClientServiceFallbackFactory.class)
 public interface TestClientService {
 
-	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	@GetMapping(value = "/api/get")
 	public Msg get();
 
 }

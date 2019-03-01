@@ -6,12 +6,15 @@ import com.music.service.VideoService;
 import com.music.file.FileUtil;
 import com.music.utils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @RestController
+@RequestMapping("/api")
 public class VideoController {
     @Autowired
     private FileUtil fileUtil;
@@ -32,16 +35,18 @@ public class VideoController {
         return Msg.success().add("videoName",fileName);
     }
     //视频信息存储
-    @PostMapping("/insertVideo")
-    public Msg insertVideo(Video video){
-        video.setUpdateTime(new Date());
-        System.out.println(video);
+    @RequestMapping(value = "/insertVideo",method = RequestMethod.POST)/*,produces = "application/json;charset=UTF-8"*/
+    public Msg insertVideo(@RequestBody Video video){
+
+        //String playTimes=request.getParameter( "playTimes" );
+        System.out.println("playTimes = " + video);
+        //video.setUpdateTime(new Date());
+        //System.out.println("video = " + video);
         if(videoService.insertVideo(video)!=0){
             return Msg.success();
         }else{
             return Msg.fail();
         }
-        /*return Msg.fail();*/
     }
 
 

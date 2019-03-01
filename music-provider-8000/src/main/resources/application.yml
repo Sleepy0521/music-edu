@@ -4,7 +4,7 @@ server:
 #数据源 默认使用tomcat.jdbc数据源
 spring:
   application:
-    name: mpm-provider                            #对外暴漏的微服务名字
+    name: music-provider                            #对外暴漏的微服务名字
   datasource:
     username: root
     password: root

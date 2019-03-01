@@ -1,17 +1,7 @@
 package com.music.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-
 import java.util.Date;
-@NoArgsConstructor //无参构造器
-@AllArgsConstructor //全参构造器
-@Data //get set 方法
-@Accessors(chain=true) //链式调用
-@ToString
+
 public class Note {
     private Integer id;
 
@@ -25,4 +15,51 @@ public class Note {
 
     private Integer ispublic;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author == null ? null : author.trim();
+    }
+
+    public Integer getIspublic() {
+        return ispublic;
+    }
+
+    public void setIspublic(Integer ispublic) {
+        this.ispublic = ispublic;
+    }
 }

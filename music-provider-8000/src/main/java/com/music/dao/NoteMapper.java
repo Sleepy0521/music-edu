@@ -1,16 +1,16 @@
 package com.music.dao;
 
-
 import com.music.entities.Note;
 import com.music.entities.NoteExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface NoteMapper {
     long countByExample(NoteExample example);
 
     int deleteByExample(NoteExample example);
+
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Note record);
 
@@ -18,7 +18,13 @@ public interface NoteMapper {
 
     List<Note> selectByExample(NoteExample example);
 
+    Note selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") Note record, @Param("example") NoteExample example);
 
     int updateByExample(@Param("record") Note record, @Param("example") NoteExample example);
+
+    int updateByPrimaryKeySelective(Note record);
+
+    int updateByPrimaryKey(Note record);
 }

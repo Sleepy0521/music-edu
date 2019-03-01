@@ -208,7 +208,7 @@
         $('#submit').click(function () {
             console.log("22222222222222");
             $.ajax({
-                url: serverUrl + "/music/video/insertVideo",
+                url: serverUrl +"/insertVideo",
                 type: "POST",
                 data: {
                     "title": $('#title').val(),
@@ -233,9 +233,7 @@
     });
 
     //视频信息上传
-    function f() {
 
-    }
 
     //视频文件上传
     function upVideo() {
@@ -254,7 +252,7 @@
             swf: 'webuploader-0.1.5/Uploader.swf',
 
             // 文件接收服务端。
-            server: serverUrl + '/music/video/uploadVideo',
+            server: serverUrl + '/uploadVideo',
 
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.

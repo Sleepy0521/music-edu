@@ -9,8 +9,8 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 @EnableEurekaClient
 @EnableFeignClients(basePackages= {"com.music"})
 //@ComponentScan("com.tencent.mpm")
-public class MusicConsumer8300 {
+public class Consumer8300 {
     public static void main(String[] args) {
-        SpringApplication.run(MusicConsumer8300.class, args);
+        SpringApplication.run(Consumer8300.class, args);
     }
 }

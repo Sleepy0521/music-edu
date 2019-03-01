@@ -1,16 +1,16 @@
 package com.music.dao;
 
-
 import com.music.entities.Video;
 import com.music.entities.VideoExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface VideoMapper {
     long countByExample(VideoExample example);
 
     int deleteByExample(VideoExample example);
+
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Video record);
 
@@ -18,7 +18,13 @@ public interface VideoMapper {
 
     List<Video> selectByExample(VideoExample example);
 
+    Video selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") Video record, @Param("example") VideoExample example);
 
     int updateByExample(@Param("record") Video record, @Param("example") VideoExample example);
+
+    int updateByPrimaryKeySelective(Video record);
+
+    int updateByPrimaryKey(Video record);
 }

@@ -2,10 +2,13 @@ package com.music.config;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RetryRule;
+import feign.form.spring.SpringFormEncoder;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
+
+import java.beans.Encoder;
 
 @Configuration
 public class ConfigBean //boot -->spring   applicationContext.xml --- @Configuration配置   ConfigBean = applicationContext.xml
@@ -22,6 +25,12 @@ public class ConfigBean //boot -->spring   applicationContext.xml --- @Configura
         //return new RandomRule();//达到的目的，用我们重新选择的随机算法替代默认的轮询。
         return new RetryRule();
     }
+
+   /* @Bean
+    public SpringFormEncoder feignFormEncoder() {
+        return new SpringFormEncoder();
+    }*/
+
 
 
 }
