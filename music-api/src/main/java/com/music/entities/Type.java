@@ -1,6 +1,19 @@
 package com.music.entities;
 
-public class Type {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+
+@NoArgsConstructor //无参构造器
+@AllArgsConstructor //全参构造器
+@Data //get set 方法
+@Accessors(chain=true) //链式调用
+@ToString
+public class Type implements Serializable {
     private Integer typeId;
 
     private String typeName;
@@ -9,15 +22,5 @@ public class Type {
         return typeId;
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
-    }
 
-    public String getTypeName() {
-        return typeName;
-    }
-
-    public void setTypeName(String typeName) {
-        this.typeName = typeName == null ? null : typeName.trim();
-    }
 }
