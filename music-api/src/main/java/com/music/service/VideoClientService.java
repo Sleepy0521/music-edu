@@ -14,7 +14,7 @@ public interface VideoClientService {
     Msg get();
 
     //@PostMapping(value = "/insertVideo")
-    @RequestMapping(value = "/insertVideo",method = RequestMethod.POST)
+    @PostMapping(value = "/insertVideo")/*,method = RequestMethod.POST*/
     Msg insertVideo(@RequestBody Video video);
 
 

@@ -11,10 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api")
 @FeignClient(value = "music-provider")
 public interface VideoClientUpload {
-
-
     @PostMapping(value = "/uploadVideo",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     Msg uploadVideo(@RequestPart(value = "file") MultipartFile file);
-
-
 }

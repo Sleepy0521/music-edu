@@ -35,7 +35,7 @@ public class VideoController {
         return Msg.success().add("videoName",fileName);
     }
     //视频信息存储
-    @RequestMapping(value = "/insertVideo",method = RequestMethod.POST)/*,produces = "application/json;charset=UTF-8"*/
+    @PostMapping(value = "/insertVideo",produces = "application/json;charset=UTF-8")/**/
     public Msg insertVideo(@RequestBody Video video){
 
         //String playTimes=request.getParameter( "playTimes" );

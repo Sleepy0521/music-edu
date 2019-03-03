@@ -30,7 +30,7 @@ public class VideoController {
         return videoClientUpload.uploadVideo(file);
     }
     //视频信息存储
-    @PostMapping(value = "/insertVideo")
+    @PostMapping(value = "/insertVideo",produces = "application/json;charset=UTF-8")
     public Msg insertVideo(@RequestBody Video video){
         System.out.println("video = " + video);
         return videoClientService.insertVideo(video);

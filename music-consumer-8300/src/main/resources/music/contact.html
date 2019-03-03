@@ -211,13 +211,13 @@
                 url: serverUrl +"/insertVideo",
                 type: "POST",
                 contentType: "application/json;charset=UTF-8",
-
                 data: JSON.stringify({
                     "title": $('#title').val(),
                     "email":$('#email').val(),
                     "typeId":$('#typeId').val(),
                     "url":$('#url').val(),
                 }),
+                dataType: 'json',
                 success: function (res) {
                     if (res.code == 100) {
                         var M = {}
