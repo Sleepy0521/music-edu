@@ -6,6 +6,8 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- 最新版本的 jquery文件 文件 -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!--jquery cookie文件-->
+    <script src="./js/jquery.cookie-1.4.1.js"></script>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -24,6 +26,8 @@
     <script type="text/javascript" src="./alert/js/alert.js"></script>
     <!--config.js-->
     <script type="text/javascript" src="./js/config.js"></script>
+    <!--页面头初始化的公共方法-->
+    <script type="text/javascript" src="./page/component/initPage.js"></script>
     <style>
         .video-type {
             background: rgba(5, 5, 5, 0.22);
@@ -49,25 +53,6 @@
 <!--页面头-->
 <div class="header">
     <div class="header_top">
-        <div class="wrap">
-            <div class="logo">
-                <a href="index.html"><img src="images/logo.png" alt=""/></a>
-            </div>
-            <div class="menu">
-                <ul>
-                    <li><a href="index.html">主页</a></li>
-                    <li><a href="about.html">简介</a></li>
-                    <li><a href="events.html">EVENTS</a></li>
-                    <li><a href="gallery.html">GALLERY</a></li>
-                    <li><a href="blog.html">BLOG</a></li>
-                    <li class="active"><a href="contact.html">上传</a></li>
-                    <li><a href="contact.html">注册</a></li>
-                    <li><a href="contact.html">登陆</a></li>
-                    <div class="clear"></div>
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </div>
     </div>
 </div>
 <div class="main">
@@ -178,18 +163,25 @@
 </div>
 <!--页面底-->
 <div class="copy"></div>
+
+
 <script>
-    //初始化
+
+    //初始化加载页面
     $(function () {
-        //加载footer
-        $('.footer').load("./page/component/footer.html");
-        $('.copy').load("./page/component/link.html");
+        //initPage中添加静态header和footer
+        addHeaderAndFooter();
         //视频文件上传
         upVideo();
         //提交按钮点击事件 视频信息上传
         upVideoMessage();
     });
 
+    //当所有文档和页面都加载完毕后绑定header的事件和显示
+    window.onload=function () {
+        //initPage中为header绑定事件
+        initHeader();
+    };
 
 
     function upVideoMessage() {
