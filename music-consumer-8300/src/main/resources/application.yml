@@ -10,6 +10,14 @@ spring.resources.static-locations: classpath:/music/
 feign:
   hystrix:
     enabled: true
+    #设置hystrix超时时间
+    command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 10000
+
 eureka:
   client:
     register-with-eureka: true
@@ -21,3 +29,4 @@ eureka:
     instance-id: consumer-8300
     prefer-ip-address: true     #访问路径可以显示IP地址
     hostname: localhost
+

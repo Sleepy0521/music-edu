@@ -14,6 +14,7 @@ public class UserController {
 
     @PostMapping(value = "/register",produces = "application/json;charset=UTF-8")
     public Msg register(@RequestBody User user) {
+
         return userClientService.register(user);
     }
     @PostMapping(value = "/login",produces = "application/json;charset=UTF-8")

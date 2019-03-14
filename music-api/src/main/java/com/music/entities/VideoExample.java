@@ -554,6 +554,76 @@ public class VideoExample {
             addCriterion("play_times not between", value1, value2, "playTimes");
             return (Criteria) this;
         }
+
+        public Criteria andPngIsNull() {
+            addCriterion("png is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngIsNotNull() {
+            addCriterion("png is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngEqualTo(String value) {
+            addCriterion("png =", value, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngNotEqualTo(String value) {
+            addCriterion("png <>", value, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngGreaterThan(String value) {
+            addCriterion("png >", value, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngGreaterThanOrEqualTo(String value) {
+            addCriterion("png >=", value, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngLessThan(String value) {
+            addCriterion("png <", value, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngLessThanOrEqualTo(String value) {
+            addCriterion("png <=", value, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngLike(String value) {
+            addCriterion("png like", value, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngNotLike(String value) {
+            addCriterion("png not like", value, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngIn(List<String> values) {
+            addCriterion("png in", values, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngNotIn(List<String> values) {
+            addCriterion("png not in", values, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngBetween(String value1, String value2) {
+            addCriterion("png between", value1, value2, "png");
+            return (Criteria) this;
+        }
+
+        public Criteria andPngNotBetween(String value1, String value2) {
+            addCriterion("png not between", value1, value2, "png");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -19,6 +19,15 @@ public class VideoClientServiceFallbackFactory implements FallbackFactory<VideoC
             public Msg insertVideo(Video video) {
                 return Msg.fail().add("info","视频信息插入服务异常");
             }
+            @Override
+            public Msg getLastVideo() {
+                return Msg.fail().add("info","未能成功调取到provider提供的接口，这是服务降级返回的信息");
+            }
+
+            @Override
+            public Msg getHotVideo() {
+                return Msg.fail().add("info","未能成功调取到provider提供的接口，这是服务降级返回的信息");
+            }
         };
     }
 }

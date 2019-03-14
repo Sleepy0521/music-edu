@@ -4,13 +4,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <!--广告轮播滑动css-->
-    <link href="css/slider.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- 最新版本的 jquery文件 文件 -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!--jquery cookie文件-->
     <script src="./js/jquery.cookie-1.4.1.js"></script>
-    <!--广告轮播滑动js-->
+    <!-- 最新版本的 Bootstrap  -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!--alert组件-->
+    <link rel="stylesheet" type="text/css" href="./alert/css/alert.css">
+    <script type="text/javascript" src="./alert/js/alert.js"></script>
+    <!--config.js-->
+    <script type="text/javascript" src="./js/config.js"></script>
+
+
+    <!--广告轮播滑动-->
+    <link href="css/slider.css" rel="stylesheet" type="text/css" media="all"/>
     <script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
     <!--页面头初始化的公共方法-->
     <script type="text/javascript" src="./page/component/initPage.js"></script>
@@ -41,7 +55,7 @@
     <div class="wrap">
         <div class="section group">
             <div class="listview_1_of_3 images_1_of_3 event_grid">
-                <a href="events.html">
+                <a href="video.html">
                     <div class="listimg listimg_1_of_2">
                         <img src="images/event_1.jpg" alt=""/>
                     </div>
@@ -53,7 +67,7 @@
                 </a>
             </div>
             <div class="listview_1_of_3 images_1_of_3 event_grid">
-                <a href="events.html">
+                <a href="video.html">
                     <div class="listimg listimg_1_of_2">
                         <img src="images/event_2.jpg" alt=""/>
                     </div>
@@ -65,7 +79,7 @@
                 </a>
             </div>
             <div class="listview_1_of_3 images_1_of_3 event_grid">
-                <a href="events.html">
+                <a href="video.html">
                     <div class="listimg listimg_1_of_2">
                         <img src="images/event_3.jpg" alt=""/>
                     </div>
@@ -80,16 +94,17 @@
         <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">手机网站模板</a></div>
         <div class="content_bottom">
             <div class="section group">
+                <!--播放量最多的视频-->
                 <div class="col_1_of_3 span_1_of_3 today_show">
-                    <h3>Today's Show</h3>
-                    <img src="images/today_show.jpg" alt=""/>
+                    <h3>最热视频-<span id="hotAuthor"></span></h3>
+                    <a href="gallery.html" id="hotVideoUrl"><img src="images/today_show.jpg" alt="" id="hotVideoImg"/></a>
                     <h5><span>31 March</span></h5>
                     <h5>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor
                         incididunt ut labore et dolore magna aliqua. </h5>
                     <a href="#" class="button">View More</a>
                 </div>
                 <div class="col_1_of_3 span_1_of_3">
-                    <h3>New Tracks</h3>
+                    <h3>网站新事件</h3>
                     <div class="track_list">
                         <ul>
                             <li><a href="#">consectetur adipisicing elit</a></li>
@@ -104,12 +119,12 @@
                         </ul>
                     </div>
                 </div>
+                <!--时间上最新的视频-->
                 <div class="col_1_of_3 span_1_of_3">
-                    <h3>Latest Videos</h3>
-                    <a href="gallery.html"><img src="images/videos.jpg" alt=""/></a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. </p>
-                    <a href="gallery.html" class="button">See All</a>
+                    <h3>最新分享视频-<span id="author"></span></h3>
+                    <a href="gallery.html" id="lastVideoUrl"><img src="images/videos.jpg" alt="" id="lastVideoImg"/></a>
+                    <p>提供最新最快最好的视频分享，为您提供更加优质的服务。方便古典音乐人士之间的交流。 </p>
+                    <a href="gallery.html" class="button">查看更多</a>
                 </div>
             </div>
         </div>
@@ -129,13 +144,62 @@
     $(function () {
         //initPage中添加静态header和footer
         addHeaderAndFooter();
+        //获取最新视频的数据
+        getLastVideo();
+        //获取最热视频的数据
+        getHotVideo();
     });
 
     //当所有文档和页面都加载完毕后绑定header的事件和显示
-    window.onload=function () {
+    window.onload = function () {
         //initPage中为header绑定事件
-        initHeader();
+        initHeader("menuMainPage");
     };
+
+    function getLastVideo() {
+        $.ajax({
+            url: serverUrl + "/getLastVideo",
+            type: "get",
+            //服务器返回相应的内容格式
+            dataType: 'json',
+            //请求成功后的回调函数
+            success: function (data) {
+                if (data.code == "100") {
+                    var lastVideo=data.extend.lastVideo;
+                    $('#lastVideoImg').attr("src",zuulUrlFile+lastVideo.png);
+                    $('#lastVideoUrl').attr("href",zuulUrlFile+lastVideo.url);
+                    $('#author').text(lastVideo.author);
+                } else {
+                    jqueryAlert({
+                        'content': '获取最新视频失败',
+                        'closeTime': 2000,
+                    });
+                }
+            }
+        });
+    }
+    function getHotVideo() {
+        $.ajax({
+            url: serverUrl + "/getHotVideo",
+            type: "get",
+            //服务器返回相应的内容格式
+            dataType: 'json',
+            //请求成功后的回调函数
+            success: function (data) {
+                if (data.code == "100") {
+                    var hotVideo=data.extend.hotVideo;
+                    $('#hotVideoImg').attr("src",zuulUrlFile+hotVideo.png);
+                    $('#hotVideoUrl').attr("href",zuulUrlFile+hotVideo.url);
+                    $('#hotAuthor').text(hotVideo.author);
+                } else {
+                    jqueryAlert({
+                        'content': '获取最热视频失败',
+                        'closeTime': 2000,
+                    });
+                }
+            }
+        });
+    }
 </script>
 
 </body>

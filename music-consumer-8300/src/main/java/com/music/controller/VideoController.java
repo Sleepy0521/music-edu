@@ -32,7 +32,17 @@ public class VideoController {
     //视频信息存储
     @PostMapping(value = "/insertVideo",produces = "application/json;charset=UTF-8")
     public Msg insertVideo(@RequestBody Video video){
-        System.out.println("video = " + video);
         return videoClientService.insertVideo(video);
     }
+    //按时间获取最新视频
+    @GetMapping(value = "getLastVideo")
+    public Msg getLastVideo(){
+        return videoClientService.getLastVideo();
+    }
+    //按播放量获取最热视频
+    @GetMapping(value = "getHotVideo")
+    public Msg getHotVideo(){
+        return videoClientService.getHotVideo();
+    }
+
 }

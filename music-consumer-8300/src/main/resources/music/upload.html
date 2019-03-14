@@ -66,21 +66,26 @@
 
                             <div>
                                 <span>
-                                    <input id="title" type="text" class="textbox" value="Title"
+                                    <input id="title" type="text" class="textbox" value="标题"
                                            onfocus="this.value = '';"
-                                           onblur="if (this.value == '') {this.value = 'Title';}">
+                                           onblur="if (this.value == '') {this.value = '标题';}">
                                 </span>
                             </div>
                             <div>
                                 <span>
-                                    <input id="email" type="text" class="textbox" value="Email"
+                                    <input id="email" type="text" class="textbox" value="邮箱"
                                            onfocus="this.value = '';"
-                                           onblur="if (this.value == '') {this.value = 'Email';}">
+                                           onblur="if (this.value == '') {this.value = '邮箱';}">
                                 </span>
                             </div>
                             <div style="display: none">
                                 <span>
-                                    <input id="url" type="text" class="textbox">
+                                    <input id="videoUrl" type="text" class="textbox">
+                                </span>
+                            </div>
+                            <div style="display: none">
+                                <span>
+                                    <input id="imgUrl" type="text" class="textbox">
                                 </span>
                             </div>
 
@@ -107,7 +112,7 @@
                                 <div id="thelist" class="uploader-list"></div>
 
                                 <div class="btns">
-                                    <div id="picker">选择文件</div>
+                                    <div id="picker">点我选择文件</div>
                                     <button id="ctlBtn" class="btn btn-default">开始上传</button>
                                 </div>
                                 <!--<div class="alert alert-success fade in" role="alert" id="uploadMsg">
@@ -124,24 +129,24 @@
                         </div>
                     </div>
                     <!--上传视频的信息-->
-                    <div class="col_1_of_3 contact_1_of_3">
+                   <!-- <div class="col_1_of_3 contact_1_of_3">
                         <div class="company_address">
                             <h3>视频信息</h3>
                             <p>视频名:</p>
                             <p>日期:</p>
-                            <p>USA</p>
+                            <p>China</p>
                             <p>分辨率:1280*720</p>
                             <p>码率: 30fbps</p>
                             <p>Email: <span><a href="#">649814031@qq.com</a></span></p>
                             <p>分享: <span>Facebook</span>, <span>Twitter</span></p>
                         </div>
-                    </div>
+                    </div>-->
                     <!--视频预览-->
                     <div class="col_1_of_3 contact_1_of_3">
                         <div class="contact_info">
                             <h3>视频预览</h3>
                             <div class="map">
-                                <iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0"
+                                <iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" id="vidoShow"
                                         marginwidth="0"
                                         src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265&amp;output=embed"></iframe>
                                 <br>
@@ -179,8 +184,8 @@
 
     //当所有文档和页面都加载完毕后绑定header的事件和显示
     window.onload=function () {
-        //initPage中为header绑定事件
-        initHeader();
+        //initPage中为header绑定事件传入高亮菜单id
+        initHeader("menuUpVideo");
     };
 
 
@@ -192,21 +197,29 @@
                 contentType: "application/json;charset=UTF-8",
                 data: JSON.stringify({
                     "title": $('#title').val(),
-                    "email": $('#email').val(),
+                    "author":$.cookie('username'),
+                    //"email": $('#email').val(),
                     "typeId": $('#typeId').val(),
-                    "url": $('#url').val(),
+                    "url": $('#videoUrl').val(),
+                    "png": $('#imgUrl').val(),
                 }),
                 dataType: 'json',
                 success: function (res) {
                     if (res.code == 100) {
-                        var M = {}
+                        /*var M = {}
                         M.dialog1 = jqueryAlert({
                             'content': '提交成功',
                             'closeTime': 2000,
                         });
-                        M.dialog1.show();
+                        M.dialog1.show();*/
+                        jqueryAlert({
+                            'content': '处理成功',
+                            'closeTime': 2000,
+                        });
+                        //msgSuccess.dialog1.show();
                     } else {
-                        layer.msg(data.msg);
+                        //layer.msg(data.msg);
+                        msgFail.dialog1.show();
                     }
                 }
             });
@@ -262,11 +275,13 @@
 
             $percent.css('width', percentage * 100 + '%');
         });
-
+        /*上传视频成功后的回调函数*/
         uploader.on('uploadSuccess', function (file, res) {
             $('#' + file.id).find('p.state').text('上传成功');
-            $('#url').val(res.extend.videoName);
-
+            var videoName=res.extend.videoName;
+            $('#videoUrl').val(videoName);
+            $('#imgUrl').val(res.extend.imgName);
+            $('#vidoShow').attr("src",zuulUrl+"/api/music/download/"+videoName)
         });
 
         uploader.on('uploadError', function (file) {

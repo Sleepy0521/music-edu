@@ -32,21 +32,29 @@ public class VideoController {
     @PostMapping("/uploadVideo")
     public Msg uploadVideo(@RequestParam("file") MultipartFile file)  {
         String fileName = fileUtil.upFileMethod(file);
-        return Msg.success().add("videoName",fileName);
+        String imgName=fileUtil.creatImg(fileName);
+        return Msg.success().add("videoName",fileName).add("imgName",imgName);
     }
     //视频信息存储
     @PostMapping(value = "/insertVideo",produces = "application/json;charset=UTF-8")/**/
     public Msg insertVideo(@RequestBody Video video){
-
-        //String playTimes=request.getParameter( "playTimes" );
-        System.out.println("playTimes = " + video);
-        //video.setUpdateTime(new Date());
-        //System.out.println("video = " + video);
         if(videoService.insertVideo(video)!=0){
             return Msg.success();
         }else{
             return Msg.fail();
         }
+    }
+    //按时间获取最新视频
+    @GetMapping(value = "getLastVideo")
+    public Msg getLastVideo(){
+        Video lastVideo=videoService.getLastVideo();
+        return Msg.success().add("lastVideo",lastVideo);
+    }
+    //按播放量获取最热视频
+    @GetMapping(value = "getHotVideo")
+    public Msg getHotVideo(){
+        Video hotVideo=videoService.getHotVideo();
+        return Msg.success().add("hotVideo",hotVideo);
     }
 
 
