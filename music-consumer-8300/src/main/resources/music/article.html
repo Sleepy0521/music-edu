@@ -4,27 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- 最新版本的 jquery文件 文件 -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!--jquery cookie文件-->
+    <script src="./js/jquery.cookie-1.4.1.js"></script>
+    <!--页面头初始化的公共方法-->
+    <script type="text/javascript" src="./page/component/initPage.js"></script>
 </head>
 <body>
 <div class="header">
     <div class="header_top">
-        <div class="wrap">
-            <div class="logo">
-                <a href="index.html"><img src="images/logo.png" alt=""/></a>
-            </div>
-            <div class="menu">
-                <ul>
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="about.html">ABOUT</a></li>
-                    <li><a href="video.html">EVENTS</a></li>
-                    <li><a href="gallery.html">GALLERY</a></li>
-                    <li class="active"><a href="article.html">BLOG</a></li>
-                    <li><a href="upload.html">CONTACT</a></li>
-                    <div class="clear"></div>
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </div>
+
     </div>
 </div>
 <div class="main">
@@ -46,7 +36,7 @@
                                 aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
                                 velit esse cillum dolore eu fugiat nulla pariatur.<span>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
                             </p>
-                            <a href="#" class="button">Read More</a>
+                            <a href="./page/article/articleDetail.html" class="button">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -100,38 +90,22 @@
     </div>
 </div>
 <div class="footer">
-    <div class="wrap">
-        <div class="half-footer" style="margin-left:0">
-            <ul class="feeds">
-                <h3>Our Latest feeds</h3>
-                <li><a href="index.html">Lorem ipsum dolor consectetur adiping</a></li>
-                <li><a href="article.html">Nunc sagittis mollis eros, at venenatis</a></li>
-                <li><a href="article.html">Morbi nec dolor ipsum vel congugue</a></li>
-                <li><a href="article.html">Nullam a odio ipsum, at sodales lorem.</a></li>
-                <li><a href="upload.html">Nullam imperdiet vulputate congugue</a></li>
-            </ul>
-            <div class="footer-pic"><img src="images/f-icon.png" alt=""></div>
-            <div class="clear"></div>
-        </div>
-        <div class="half-footer" style="border:none">
-            <ul class="adress">
-                <h3>Catch on</h3>
-                <li><a href="index.html">Events Club</a></li>
-                <li><a href="article.html">West Coast, CA</a></li>
-                <li><a href="article.html">Facebook - I Music</a></li>
-                <li><a href="article.html">Login</a></li>
-                <li><a href="upload.html">yourname(at)companyname.com</a></li>
-            </ul>
-            <div class="footer-pic"><img src="images/foot-icon.png" alt=""></div>
-        </div>
-        <div class="clear"></div>
-    </div>
 </div>
 <div class="copy">
-    <p>© 2013 Rights Reseverd | Design by W3layouts. More Templates <a href="http://www.cssmoban.com/" target="_blank"
-                                                                       title="模板之家">模板之家</a> - Collect from <a
-            href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
 </div>
+<script>
+    //初始化加载页面
+    $(function () {
+        //initPage中添加静态header和footer
+        addHeaderAndFooter();
+    });
+
+    //当所有文档和页面都加载完毕后绑定header的事件和显示
+    window.onload = function () {
+        //initPage中为header绑定事件
+        initHeader("menuArticle");
+    };
+</script>
 </body>
 </html>
 

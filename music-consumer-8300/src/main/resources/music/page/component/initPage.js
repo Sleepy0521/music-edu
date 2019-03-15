@@ -24,10 +24,10 @@ function initHeader(highMenu){
 }
 function addHeaderAndFooter() {
     //加载header
-    $('.header_top').load("./page/component/header.html");
+    $('.header_top').load("/page/component/header.html");
     //加载footer
-    $('.footer').load("./page/component/footer.html");
-    $('.copy').load("./page/component/link.html");
+    $('.footer').load("/page/component/footer.html");
+    $('.copy').load("/page/component/link.html");
 
    /* var msgSuccess = {};
     msgSuccess.dialog1 = jqueryAlert({
