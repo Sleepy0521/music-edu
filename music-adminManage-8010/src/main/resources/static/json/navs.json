@@ -1,0 +1,14 @@
+[
+  {
+    "title": "后台首页",
+    "icon": "icon-computer",
+    "href": "page/main.html",
+    "spread": false
+  },
+  {
+    "title": "文章信息管理",
+    "icon": "icon-computer",
+    "href": "page/article/article.html",
+    "spread": false
+  }
+]
