@@ -6,7 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="music-adminManage-8010" />
         <module name="music-api" />
+        <module name="music-api-db" />
         <module name="music-consumer-8300" />
         <module name="music-dashboard-9000" />
         <module name="music-eureka-7000" />

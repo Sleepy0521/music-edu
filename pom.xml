@@ -12,10 +12,12 @@
     <modules>
         <module>music-eureka-7000</module>
         <module>music-api</module>
+        <module>music-api-db</module>
         <module>music-provider-8000</module>
         <module>music-consumer-8300</module>
         <module>music-dashboard-9000</module>
         <module>music-zuul-8600</module>
+        <module>music-adminManage-8010</module>
     </modules>
     <packaging>pom</packaging>
     <name>music-edu</name>
