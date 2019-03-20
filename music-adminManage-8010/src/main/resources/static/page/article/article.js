@@ -16,63 +16,6 @@ layui.config({
         $(".page_message").text("共" + newsData.length + "条")
         newsList();
     });
-    //加载新增或编辑时  栏目下拉选框
-    //获取一级栏目信息
-    $.ajax({
-        url: serverUrl + "/PoliceChangPing/program/getParentProName",
-        type: "POST",
-        contentType: "application/json;charset=UTF-8",
-        data: JSON.stringify({}),
-        dataType: 'json',
-        success: function (data) {
-            if (data.code == "100") {
-                var parentProName = data.extend.parentNameList;
-                if (parentProName.length != 0) {
-                    for (var i = 0; i < parentProName.length; i++) {
-
-                        var html = '<option value="' + parentProName[i].programId + '">' + parentProName[i].programName + '</option>';
-                        $("#parent_pro_id").append(html);
-                    }
-                }
-                form.render('select');
-            } else {
-                layer.msg(data.msg);
-            }
-        }
-
-    });
-    //监听一级栏目，联动下拉选择二级栏目
-    form.on('select(parentProName)', function (data) {
-        $("#pro_id").empty();
-        //获得省份ID
-        var programId = data.value;
-        $.ajax({
-            url: serverUrl + "/PoliceChangPing/program/getChildProName",
-            type: 'POST',
-            data: JSON.stringify({
-                "programId": programId
-            }),
-            contentType: "application/json",
-            dataType: 'json',
-            success: function (data) {
-                if (data.code == "100") {
-                    var childProName = data.extend.childNameList;
-                    if (childProName.length != 0) {
-                        for (var i = 0; i < childProName.length; i++) {
-                            var html = '<option value="' + childProName[i].programId + '">' + childProName[i].programName + '</option>';
-                            $("#pro_id").append(html);
-                        }
-                    }
-                    form.render('select');
-                } else {
-                    $("#pro_id").empty();
-                    layer.msg("暂无子栏目");
-                    form.render('select');
-                }
-            }
-        });
-
-    });
 
     //适配页面数据
     function newsList() {
@@ -246,7 +189,7 @@ layui.config({
 
         });
         $("#refresh").click();
-    })
+    });
     //删除按钮绑定
     $("#delete").click(function () {
         var ids = [];
@@ -309,7 +252,8 @@ layui.config({
     //绑定上传图片按钮
     $("#uploadbtn").click(function () {
         $("#upload").click();
-    })
+    });
+    });
 
     //icon图片上传
     $("#upload").change(function () {
@@ -369,17 +313,13 @@ layui.config({
             txt = $('#txt').html();
             $("#txt").empty();
         });
-
-
         $.ajax({
-            url: serverUrl + "/PoliceChangPing/article/insertArticle",
+            url: serverUrl + "/api/article/insertArticle",
             type: "POST",
             //请求体内容的方式
             contentType: "application/json;charset=UTF-8",
             //请求体
             data: JSON.stringify({
-                "parentProId": $("#parent_pro_id").val(),//父级目录id 所属栏目id
-                "proId": $("#pro_id").val()==null?"":$("#pro_id").val(),//自己栏目id 二级栏目id
                 "title": $("#title").val(),//标题
                 "author": $("#author").val(),//作者
                 "icon": "/" + $(".upload_imgname").text(),//上传图片图片链接   /图片名
