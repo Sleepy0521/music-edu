@@ -3,12 +3,12 @@
 var config = {
 
     //接口地址
-    serverUrl: window.location.protocol + "//" + window.location.host,
+    serverUrl: window.location.protocol + "//" + window.location.host+"/admin",
 
     //接口应用
     serverApp: 'pasture-api',
     //文件资源
-    serverFile:'/PoliceChangPing/download/file',
+    serverFile:'/music/download/',
 
 };
 

@@ -435,63 +435,383 @@ public class NoteExample {
             return (Criteria) this;
         }
 
-        public Criteria andIspublicIsNull() {
-            addCriterion("ispublic is null");
+        public Criteria andIconIsNull() {
+            addCriterion("icon is null");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicIsNotNull() {
-            addCriterion("ispublic is not null");
+        public Criteria andIconIsNotNull() {
+            addCriterion("icon is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicEqualTo(Integer value) {
-            addCriterion("ispublic =", value, "ispublic");
+        public Criteria andIconEqualTo(String value) {
+            addCriterion("icon =", value, "icon");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicNotEqualTo(Integer value) {
-            addCriterion("ispublic <>", value, "ispublic");
+        public Criteria andIconNotEqualTo(String value) {
+            addCriterion("icon <>", value, "icon");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicGreaterThan(Integer value) {
-            addCriterion("ispublic >", value, "ispublic");
+        public Criteria andIconGreaterThan(String value) {
+            addCriterion("icon >", value, "icon");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicGreaterThanOrEqualTo(Integer value) {
-            addCriterion("ispublic >=", value, "ispublic");
+        public Criteria andIconGreaterThanOrEqualTo(String value) {
+            addCriterion("icon >=", value, "icon");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicLessThan(Integer value) {
-            addCriterion("ispublic <", value, "ispublic");
+        public Criteria andIconLessThan(String value) {
+            addCriterion("icon <", value, "icon");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicLessThanOrEqualTo(Integer value) {
-            addCriterion("ispublic <=", value, "ispublic");
+        public Criteria andIconLessThanOrEqualTo(String value) {
+            addCriterion("icon <=", value, "icon");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicIn(List<Integer> values) {
-            addCriterion("ispublic in", values, "ispublic");
+        public Criteria andIconLike(String value) {
+            addCriterion("icon like", value, "icon");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicNotIn(List<Integer> values) {
-            addCriterion("ispublic not in", values, "ispublic");
+        public Criteria andIconNotLike(String value) {
+            addCriterion("icon not like", value, "icon");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicBetween(Integer value1, Integer value2) {
-            addCriterion("ispublic between", value1, value2, "ispublic");
+        public Criteria andIconIn(List<String> values) {
+            addCriterion("icon in", values, "icon");
             return (Criteria) this;
         }
 
-        public Criteria andIspublicNotBetween(Integer value1, Integer value2) {
-            addCriterion("ispublic not between", value1, value2, "ispublic");
+        public Criteria andIconNotIn(List<String> values) {
+            addCriterion("icon not in", values, "icon");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconBetween(String value1, String value2) {
+            addCriterion("icon between", value1, value2, "icon");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconNotBetween(String value1, String value2) {
+            addCriterion("icon not between", value1, value2, "icon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(Integer value) {
+            addCriterion("type =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(Integer value) {
+            addCriterion("type <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(Integer value) {
+            addCriterion("type >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("type >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(Integer value) {
+            addCriterion("type <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("type <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<Integer> values) {
+            addCriterion("type in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<Integer> values) {
+            addCriterion("type not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(Integer value1, Integer value2) {
+            addCriterion("type between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("type not between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeIsNull() {
+            addCriterion("grap_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeIsNotNull() {
+            addCriterion("grap_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeEqualTo(Integer value) {
+            addCriterion("grap_type =", value, "grapType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeNotEqualTo(Integer value) {
+            addCriterion("grap_type <>", value, "grapType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeGreaterThan(Integer value) {
+            addCriterion("grap_type >", value, "grapType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("grap_type >=", value, "grapType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeLessThan(Integer value) {
+            addCriterion("grap_type <", value, "grapType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("grap_type <=", value, "grapType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeIn(List<Integer> values) {
+            addCriterion("grap_type in", values, "grapType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeNotIn(List<Integer> values) {
+            addCriterion("grap_type not in", values, "grapType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeBetween(Integer value1, Integer value2) {
+            addCriterion("grap_type between", value1, value2, "grapType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGrapTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("grap_type not between", value1, value2, "grapType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefIsNull() {
+            addCriterion("brief is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefIsNotNull() {
+            addCriterion("brief is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefEqualTo(String value) {
+            addCriterion("brief =", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefNotEqualTo(String value) {
+            addCriterion("brief <>", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefGreaterThan(String value) {
+            addCriterion("brief >", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefGreaterThanOrEqualTo(String value) {
+            addCriterion("brief >=", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefLessThan(String value) {
+            addCriterion("brief <", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefLessThanOrEqualTo(String value) {
+            addCriterion("brief <=", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefLike(String value) {
+            addCriterion("brief like", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefNotLike(String value) {
+            addCriterion("brief not like", value, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefIn(List<String> values) {
+            addCriterion("brief in", values, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefNotIn(List<String> values) {
+            addCriterion("brief not in", values, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefBetween(String value1, String value2) {
+            addCriterion("brief between", value1, value2, "brief");
+            return (Criteria) this;
+        }
+
+        public Criteria andBriefNotBetween(String value1, String value2) {
+            addCriterion("brief not between", value1, value2, "brief");
             return (Criteria) this;
         }
     }

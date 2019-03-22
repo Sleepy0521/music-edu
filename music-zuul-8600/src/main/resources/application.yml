@@ -1,7 +1,14 @@
 server:
   port: 8600
+  tomcat:
+    uri-encoding: UTF-8
 
 spring:
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
   application:
     name: microservicecloud-zuul-gateway
 
@@ -22,8 +29,12 @@ zuul:
   #ignored-services: "*"
   #配置服务名和路径名对应关系
   routes:
-    test.serviceId: music-provider
-    test.path: /api/**
+    provider.serviceId: music-provider
+    provider.path: /api/**
+    consumer.serviceId: music-consumer
+    consumer.path: /consumer/**
+    adminManage.serviceId: music-adminManage
+    adminManage.path: /admin/**
 
 info:
   app.name: atguigu-microcloud

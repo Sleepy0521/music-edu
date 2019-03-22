@@ -36,6 +36,14 @@ mybatis:
   # 指定sql映射文件位置
   mapper-locations: classpath:mybatis/mapper/*.xml
 
+file:
+  #静态资源对外暴露的访问路径
+  staticAccessPath: /music/download/**
+  #文件上传目录(实际物理地址)
+  #uploadFolder: c:/PoliceChangPing/uploadFolder/
+  #正式环境目录(实际物理地址)
+  uploadFolder: /home/sleepy/music/uploadFolder/
+
 eureka:
   client: #客户端注册进eureka服务列表内
     service-url:

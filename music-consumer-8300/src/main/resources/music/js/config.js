@@ -3,7 +3,7 @@
 var config = {
 
     //前端接口地址
-    serverUrl: window.location.protocol + "//" + window.location.host+"/degradeApi",
+    serverUrl: window.location.protocol + "//" + window.location.host+"/consumer/degradeApi",
     //路由接口地址
     zuulUrl: "http:" + "//" + "127.0.0.1:8600",
     //接口应用

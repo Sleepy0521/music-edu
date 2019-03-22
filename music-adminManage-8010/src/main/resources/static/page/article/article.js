@@ -10,11 +10,68 @@ layui.config({
     var ueditor = UM.getEditor('myEditor');
     //加载页面数据
     var newsData = '';
-    $.get(serverUrl + "/PoliceChangPing/article/getAllArticle", function (data) {
+    $.get(serverUrl + "/api/article/getAllArticle", function (data) {
         newsData = data.extend.graphicsList;
         //分页栏 数据总数赋值
         $(".page_message").text("共" + newsData.length + "条")
         newsList();
+    });
+    //加载新增或编辑时  栏目下拉选框
+    //获取一级栏目信息
+    /*$.ajax({
+        url: serverUrl + "/PoliceChangPing/program/getParentProName",
+        type: "POST",
+        contentType: "application/json;charset=UTF-8",
+        data: JSON.stringify({}),
+        dataType: 'json',
+        success: function (data) {
+            if (data.code == "100") {
+                var parentProName = data.extend.parentNameList;
+                if (parentProName.length != 0) {
+                    for (var i = 0; i < parentProName.length; i++) {
+
+                        var html = '<option value="' + parentProName[i].programId + '">' + parentProName[i].programName + '</option>';
+                        $("#parent_pro_id").append(html);
+                    }
+                }
+                form.render('select');
+            } else {
+                layer.msg(data.msg);
+            }
+        }
+
+    });*/
+    //监听一级栏目，联动下拉选择二级栏目
+    form.on('select(parentProName)', function (data) {
+        $("#pro_id").empty();
+        //获得省份ID
+        var programId = data.value;
+        $.ajax({
+            url: serverUrl + "/PoliceChangPing/program/getChildProName",
+            type: 'POST',
+            data: JSON.stringify({
+                "programId": programId
+            }),
+            contentType: "application/json",
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == "100") {
+                    var childProName = data.extend.childNameList;
+                    if (childProName.length != 0) {
+                        for (var i = 0; i < childProName.length; i++) {
+                            var html = '<option value="' + childProName[i].programId + '">' + childProName[i].programName + '</option>';
+                            $("#pro_id").append(html);
+                        }
+                    }
+                    form.render('select');
+                } else {
+                    $("#pro_id").empty();
+                    layer.msg("暂无子栏目");
+                    form.render('select');
+                }
+            }
+        });
+
     });
 
     //适配页面数据
@@ -33,13 +90,13 @@ layui.config({
                     }
                     var tr = $("<tr>" +
                         "<td><div class='layui-form'><input type='checkbox' lay-skin='primary' lay-filter='checkChild' value=" + currData[i].grapId + "></div></td>" +
-                        "<td>" + currData[i].grapId + "</td>" +
+                        "<td>" + currData[i].id + "</td>" +
                         "<td><p>" + currData[i].title + "</p></td>" +
                         "<td>" + currData[i].author + "</td>" +
-                        "<td>" + currData[i].parentProId + "</td>" +
-                        "<td>" + currData[i].proId + "</td>" +
+                        "<td>" + currData[i].brief + "</td>" +
+                        "<td>" + currData[i].createTime + "</td>" +
                         statue +
-                        "<td>" + currData[i].chinaDateCreateTime + "</td>" +
+                        "<td>" + currData[i].updateTime+ "</td>" +
                         "</tr>");
                     $("#tableBody").append(tr);
 
@@ -189,7 +246,7 @@ layui.config({
 
         });
         $("#refresh").click();
-    });
+    })
     //删除按钮绑定
     $("#delete").click(function () {
         var ids = [];
@@ -252,15 +309,15 @@ layui.config({
     //绑定上传图片按钮
     $("#uploadbtn").click(function () {
         $("#upload").click();
-    });
-    });
+    })
 
     //icon图片上传
     $("#upload").change(function () {
         var fileName = getFileName($("#upload").val());
         $(".upload_imgname").text(fileName);
         $("#form2").ajaxSubmit({
-            url: serverUrl + "/PoliceChangPing/article/fileUpload",
+            url: serverUrl + "/api/article/pngUpload",
+            contentType: "charset=UTF-8",
             success: function (data) {
                 if (data.code == "100") {
                     $("#uploadImg").attr("src", serverUrl + serverFile + data.extend.imgSrc);
@@ -313,6 +370,8 @@ layui.config({
             txt = $('#txt').html();
             $("#txt").empty();
         });
+
+
         $.ajax({
             url: serverUrl + "/api/article/insertArticle",
             type: "POST",
@@ -322,6 +381,7 @@ layui.config({
             data: JSON.stringify({
                 "title": $("#title").val(),//标题
                 "author": $("#author").val(),//作者
+                "brief":$('#brief').val(),
                 "icon": "/" + $(".upload_imgname").text(),//上传图片图片链接   /图片名
                 "grapType": $("#way").val(), //文章输入的方式
                 "url": $("#articleUrl").val(),//文章链接
