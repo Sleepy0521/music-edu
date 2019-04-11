@@ -1,13 +1,13 @@
 server:
   port: 8600
   tomcat:
-    uri-encoding: UTF-8
+    uri-encoding: utf-8
 
 spring:
   http:
     encoding:
       force: true
-      charset: UTF-8
+      charset: utf-8
       enabled: true
   application:
     name: microservicecloud-zuul-gateway
@@ -35,7 +35,7 @@ zuul:
     consumer.path: /consumer/**
     adminManage.serviceId: music-adminManage
     adminManage.path: /admin/**
-
+  servlet-path: /
 info:
   app.name: atguigu-microcloud
   company.name: www.atguigu.com

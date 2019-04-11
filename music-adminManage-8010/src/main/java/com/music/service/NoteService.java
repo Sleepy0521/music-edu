@@ -25,4 +25,10 @@ public class NoteService {
     public List<Note> getAllArticle() {
         return noteMapper.selectByExample(new NoteExample());
     }
+
+    public Note getArticle(Integer id) {
+        NoteExample noteExample=new NoteExample();
+        noteExample.or().andIdEqualTo(id);
+        return noteMapper.selectByExample(noteExample).get(0);
+    }
 }

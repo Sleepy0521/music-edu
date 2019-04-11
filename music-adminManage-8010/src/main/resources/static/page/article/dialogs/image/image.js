@@ -102,7 +102,7 @@
                 //显示图片计数+1
 
                 Upload.showCount++;
-                var $img = $("<img src='"+window.location.protocol + "//" + window.location.host+"/PoliceChangPing/download/file"+url + "' class='edui-image-pic' />"),
+                var $img = $("<img src='"+window.location.protocol + "//" + window.location.host+"/admin/music/download"+url + "' class='edui-image-pic' />"),
                     $item = $("<div class='edui-image-item edui-image-upload-item'><div class='edui-image-close'></div></div>").append($img);
 
                 if ($(".edui-image-upload2", $w).length < 1) {

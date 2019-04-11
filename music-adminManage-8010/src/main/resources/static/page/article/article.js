@@ -197,7 +197,7 @@ layui.config({
             titles.push(title);
         });
         $.ajax({
-            url: serverUrl + "/PoliceChangPing/article/public",
+            url: serverUrl + "/api/article/public",
             type: "PUT",
             contentType: "application/json;charset=UTF-8",
             data: JSON.stringify({
@@ -228,7 +228,7 @@ layui.config({
             titles.push(title);
         });
         $.ajax({
-            url: serverUrl + "/PoliceChangPing/article/unpublic",
+            url: serverUrl + "/api/article/unpublic",
             type: "PUT",
             contentType: "application/json;charset=UTF-8",
             data: JSON.stringify({
@@ -260,7 +260,7 @@ layui.config({
         });
 
         $.ajax({
-            url: serverUrl + "/PoliceChangPing/article/delete",
+            url: serverUrl + "/api/article/delete",
             type: "DELETE",
             contentType: "application/json;charset=UTF-8",
             data: JSON.stringify({
@@ -282,7 +282,7 @@ layui.config({
     //监听状态下拉菜单
     form.on('select(status)', function (data) {
         var status = data.value;
-        $.get(serverUrl + "/PoliceChangPing/article/getArticleByStatus/" + status, function (data) {
+        $.get(serverUrl + "/api/article/getArticleByStatus/" + status, function (data) {
             newsData = '';
             newsData = data.extend.graphicsList;
             //分页栏 数据总数赋值
@@ -293,7 +293,7 @@ layui.config({
     //搜索功能
     $("#searchBtn").click(function () {
         var search = $("#searchInput").val();
-        $.get(serverUrl + "/PoliceChangPing/article/getArticleBySearch/" + search, function (data) {
+        $.get(serverUrl + "/api/article/getArticleBySearch/" + search, function (data) {
             newsData = '';
             newsData = data.extend.graphicsList;
             //分页栏 数据总数赋值
@@ -318,9 +318,13 @@ layui.config({
         $("#form2").ajaxSubmit({
             url: serverUrl + "/api/article/pngUpload",
             contentType: "charset=UTF-8",
+            data:{
+              "fileName":fileName
+            },
             success: function (data) {
                 if (data.code == "100") {
                     $("#uploadImg").attr("src", serverUrl + serverFile + data.extend.imgSrc);
+                    $("#realPngName").text(data.extend.imgSrc);
                     layer.msg(data.msg);
                 } else {
                     console.log("失败");
@@ -334,7 +338,7 @@ layui.config({
     $('#type').on('change', "#umeditorUploadId", function () {
         /* $('#eduiVideoUrl').val('http://localhost:8080/bss-manager/download/file/editor/movie.mp4');
          $("#eduiVideoUrl").trigger('change');*/
-        $('#umeditorUploadId').parent().attr("action", serverUrl + "/PoliceChangPing/article/uploadVideo").attr("enctype", "multipart/form-data").attr("method", "POST");
+        $('#umeditorUploadId').parent().attr("action", serverUrl + "/api/article/uploadVideo").attr("enctype", "multipart/form-data").attr("method", "POST");
         $('#umeditorUploadId').parent().ajaxSubmit({
             success: function (data) {
                 console.log(data);
@@ -382,7 +386,7 @@ layui.config({
                 "title": $("#title").val(),//标题
                 "author": $("#author").val(),//作者
                 "brief":$('#brief').val(),
-                "icon": "/" + $(".upload_imgname").text(),//上传图片图片链接   /图片名
+                "icon": $("#realPngName").text(),//上传图片图片链接   /图片名
                 "grapType": $("#way").val(), //文章输入的方式
                 "url": $("#articleUrl").val(),//文章链接
                 "content": txt  //文章内容获取Ueditor中的内容
@@ -407,7 +411,7 @@ layui.config({
         var id = tr.find("td:eq(1)").text();
         var title = tr.find("td:eq(2)").children("p").text();
         $.ajax({
-            url: serverUrl + "/PoliceChangPing/article/getArticle/" + id + "/" + title,
+            url: serverUrl + "/api/article/getArticle/" + id ,
             type: "GET",
             dataType: 'json',
             success: function (data) {
@@ -416,10 +420,9 @@ layui.config({
                     $("#save").hide();
                     $("#save2").show();
                     var article = data.extend.article;
-                    $("#parent_pro_id ").val(article.parentProId);//父级目录id 所属栏目id
-                    $("#pro_id").val(article.proId);//自己栏目id 二级栏目id
                     $("#title").val(article.title);//标题
                     $("#author").val(article.author);//作者
+                    $("#brief").val(article.brief);
                     $("#uploadImg").attr("src", serverUrl + serverFile + article.icon);//上传图片图片链接../../upload/
                     $('.upload_imgname').text(getFileName2(article.icon));
                     $("#way").val(article.grapType); //文章输入的方式
@@ -463,7 +466,7 @@ layui.config({
         var id = tr.find("td:eq(1)").text();
         var title = tr.find("td:eq(2)").children("p").text();
         $.ajax({
-            url: serverUrl + "/PoliceChangPing/article/getArticle/" + id + "/" + title,
+            url: serverUrl + "/api/article/getArticle/" + id + "/" + title,
             type: "GET",
             dataType: 'json',
             success: function (data) {
@@ -496,7 +499,7 @@ layui.config({
             $("#txt").empty();
         });
         $.ajax({
-            url: serverUrl + "/PoliceChangPing/article/updateArticle",
+            url: serverUrl + "/api/article/updateArticle",
             type: "PUT",
             //请求体内容的方式
             contentType: "application/json",

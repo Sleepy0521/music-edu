@@ -100,7 +100,7 @@ body {
 }
 /*标题内容过多自动省略*/
 .layui-table tbody td:nth-child(3) p {
-	width: 200px;
+	width: 100px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
