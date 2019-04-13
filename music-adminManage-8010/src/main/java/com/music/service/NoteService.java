@@ -31,4 +31,43 @@ public class NoteService {
         noteExample.or().andIdEqualTo(id);
         return noteMapper.selectByExample(noteExample).get(0);
     }
+
+    public int updateArticle(Note note) {
+        NoteExample noteExample=new NoteExample();
+        noteExample.or().andIdEqualTo(note.getId());
+        return noteMapper.updateByExampleSelective(note,noteExample);
+    }
+
+    public boolean deleteByKeys(Integer[] ids) {
+        for(Integer id:ids){
+            NoteExample noteExample=new NoteExample();
+            noteExample.or().andIdEqualTo(id);
+            noteMapper.deleteByExample(noteExample);
+        }
+        return true;
+    }
+
+    public boolean updatePublic(Integer[] ids,Integer status) {
+        for(Integer id:ids){
+            NoteExample noteExample=new NoteExample();
+            noteExample.or().andIdEqualTo(id);
+            Note note=new Note();
+            note.setId(id);
+            note.setStatus(status);
+            noteMapper.updateByExampleSelective(note,noteExample);
+        }
+        return true;
+    }
+
+    public List<Note> getArticleByStatus(Integer status) {
+        NoteExample noteExample=new NoteExample();
+        noteExample.or().andStatusEqualTo(status);
+        return noteMapper.selectByExample(noteExample);
+    }
+
+    public List<Note> getArticleBySearch(String title) {
+        NoteExample noteExample=new NoteExample();
+        noteExample.or().andTitleLike("%" + title + "%");
+        return noteMapper.selectByExample(noteExample);
+    }
 }

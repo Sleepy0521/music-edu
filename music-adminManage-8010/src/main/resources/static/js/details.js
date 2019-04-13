@@ -34,11 +34,10 @@ layui.config({
 
     $("#content").html(article.content);
     $.each($("#content").find('img'),function () {
-
         //数据库中的地址
         var imgsrc=$(this).attr('src');
         //拼串后回显的地址
-        $(this).attr('src', serverUrl+serverFile+"/"+imgsrc);
+        $(this).attr('src', serverUrl+serverFile+imgsrc);
     });
 
 });

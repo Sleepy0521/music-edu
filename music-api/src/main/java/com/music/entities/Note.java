@@ -1,7 +1,16 @@
 package com.music.entities;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
+import java.util.Date;
+@NoArgsConstructor //无参构造器
+@AllArgsConstructor //全参构造器
+@Accessors(chain=true) //链式调用
+@ToString
 public class Note {
     private Integer id;
 

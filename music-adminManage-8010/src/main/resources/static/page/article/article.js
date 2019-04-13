@@ -94,9 +94,9 @@ layui.config({
                         "<td><p>" + currData[i].title + "</p></td>" +
                         "<td>" + currData[i].author + "</td>" +
                         "<td>" + currData[i].brief + "</td>" +
-                        "<td>" + currData[i].createTime + "</td>" +
                         statue +
-                        "<td>" + currData[i].updateTime+ "</td>" +
+                        "<td>" + timestampToTime(currData[i].createTime) + "</td>" +
+                        "<td>" + timestampToTime(currData[i].updateTime)+ "</td>" +
                         "</tr>");
                     $("#tableBody").append(tr);
 
@@ -119,7 +119,17 @@ layui.config({
         });
 
     }
-
+    //时间格式转化
+    function timestampToTime(timestamp) {
+        var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        var D = date.getDate() + ' ';
+        var h = date.getHours() + ':';
+        var m = date.getMinutes() + ':';
+        var s = date.getSeconds();
+        return Y + M + D+h+m+s;
+    }
     //清空新增页面的值
     function clearAdd() {
         $("#parent_pro_id").val("");//父级目录id 所属栏目id
@@ -188,13 +198,10 @@ layui.config({
     //发布按钮绑定
     $("#publish").click(function () {
         var ids = [];
-        var titles = [];
         var tr = $("#tableBody :checked").parents("tr");
         $.each(tr, function () {
             var id = $(this).find("td:eq(1)").text();
             ids.push(id);
-            var title = $(this).find("td:eq(2)").children("p").text();
-            titles.push(title);
         });
         $.ajax({
             url: serverUrl + "/api/article/public",
@@ -202,7 +209,6 @@ layui.config({
             contentType: "application/json;charset=UTF-8",
             data: JSON.stringify({
                 "articleIds": ids,
-                "articleTitles": titles
             }),
             dataType: 'json',
             success: function (data) {
@@ -219,13 +225,10 @@ layui.config({
     //未发布按钮绑定
     $("#unpublish").click(function () {
         var ids = [];
-        var titles = [];
         var tr = $("#tableBody :checked").parents("tr");
         $.each(tr, function () {
             var id = $(this).find("td:eq(1)").text();
             ids.push(id);
-            var title = $(this).find("td:eq(2)").children("p").text();
-            titles.push(title);
         });
         $.ajax({
             url: serverUrl + "/api/article/unpublic",
@@ -233,7 +236,6 @@ layui.config({
             contentType: "application/json;charset=UTF-8",
             data: JSON.stringify({
                 "articleIds": ids,
-                "articleTitles": titles
             }),
             dataType: 'json',
             success: function (data) {
@@ -250,13 +252,10 @@ layui.config({
     //删除按钮绑定
     $("#delete").click(function () {
         var ids = [];
-        var titles = [];
         var tr = $("#tableBody :checked").parents("tr");
         $.each(tr, function () {
             var id = $(this).find("td:eq(1)").text();
             ids.push(id);
-            var title = $(this).find("td:eq(2)").children("p").text();
-            titles.push(title);
         });
 
         $.ajax({
@@ -265,7 +264,6 @@ layui.config({
             contentType: "application/json;charset=UTF-8",
             data: JSON.stringify({
                 "articleIds": ids,
-                "articleTitles": titles
             }),
             dataType: 'json',
             success: function (data) {
@@ -369,7 +367,7 @@ layui.config({
                 //真实图片访问地址
                 var imgsrc = $(this).attr('src');
                 //存入数据库中的地址
-                $(this).attr('src', "/" + getFileName2(imgsrc));
+                $(this).attr('src', getFileName2(imgsrc));
             });
             txt = $('#txt').html();
             $("#txt").empty();
@@ -427,7 +425,7 @@ layui.config({
                     $('.upload_imgname').text(getFileName2(article.icon));
                     $("#way").val(article.grapType); //文章输入的方式
                     $("#articleUrl").val(article.url);//文章链接
-                    $("#save").attr("grap_id", article.grapId);//文章id
+                    $("#save").attr("grap_id", article.id);//文章id
                     ueditor.ready(function () {
                         $("#txt").html(article.content);
                         $.each($("#txt").find('img'), function () {
@@ -464,9 +462,8 @@ layui.config({
         //获取要编辑的文章数据
         var tr = $("#tableBody :checked").parents("tr");
         var id = tr.find("td:eq(1)").text();
-        var title = tr.find("td:eq(2)").children("p").text();
         $.ajax({
-            url: serverUrl + "/api/article/getArticle/" + id + "/" + title,
+            url: serverUrl + "/api/article/getArticle/" + id ,
             type: "GET",
             dataType: 'json',
             success: function (data) {
@@ -493,7 +490,7 @@ layui.config({
                 //真实图片访问地址
                 var imgsrc = $(this).attr('src');
                 //存入数据库中的地址
-                $(this).attr('src', "/" + getFileName2(imgsrc));
+                $(this).attr('src', getFileName2(imgsrc));
             });
             txt = $('#txt').html();
             $("#txt").empty();
@@ -505,15 +502,13 @@ layui.config({
             contentType: "application/json",
             //请求体
             data: JSON.stringify({
-                "parentProId": $("#parent_pro_id").val(),//父级目录id 所属栏目id
-                "proId": $("#pro_id").val(),//自己栏目id 二级栏目id
                 "title": $("#title").val(),//标题
                 "author": $("#author").val(),//作者
                 "icon": "/" + $(".upload_imgname").text(),//上传图片图片链接   /图片名
                 "grapType": $("#way").val(), //文章输入的方式
                 "url": $("#articleUrl").val(),//文章链接
                 "content": txt, //文章内容获取Ueditor中的内容
-                "grapId": $("#save").attr("grap_id")//文章id
+                "id": $("#save").attr("grap_id")//文章id
             }),
             //服务器相应的内容格式
             dataType: 'json',

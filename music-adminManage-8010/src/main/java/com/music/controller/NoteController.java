@@ -32,44 +32,108 @@ public class NoteController {
         } else {
             return Msg.fail();
         }
-
     }
 
     @PostMapping(value = "/pngUpload")
     public Msg pngUPload(@RequestParam("file") MultipartFile file, String fileName) {
-        String imgSrc = fileUtil.upFileMethod(file,fileName);
+        String imgSrc = fileUtil.upFileMethod(file, fileName);
         if (imgSrc != null && !imgSrc.isEmpty()) {
             return Msg.success().add("imgSrc", imgSrc);
         } else {
             return Msg.fail();
         }
     }
+
+    //ueditor图片上传
     @PostMapping(value = "/fileUpload2")
     public String fileUpload2(@RequestParam("upfile") MultipartFile file) {
         String fileName = fileUtil.upFileMethod(file);
         Map<String, Object> result = new HashMap<String, Object>();
 
-        result.put("url", "/"+fileName);// 展示图片的请求url
+        result.put("url", fileName);// 展示图片的请求url
         result.put("state", "SUCCESS");
         String jStr = JSON.toJSONString(result);
         return jStr;
     }
 
+    //获取所有文章信息
     @GetMapping(value = "/getAllArticle")
     public Msg getAllArticle() {
-        List<Note> notes=noteService.getAllArticle();
-        return Msg.success().add("graphicsList",notes);
+        List<Note> notes = noteService.getAllArticle();
+        return Msg.success().add("graphicsList", notes);
     }
+
     @GetMapping(value = "/getArticle/{id}")
-    public Msg getArticle(@PathVariable("id") Integer id){
-        Note note=noteService.getArticle(id);
-        return Msg.success().add("article",note);
+    public Msg getArticle(@PathVariable("id") Integer id) {
+        Note note = noteService.getArticle(id);
+        return Msg.success().add("article", note);
     }
+
     //ueditor视频上传
     @PostMapping("/uploadVideo")
-    public String uploadVideo(@RequestParam("upvideo") MultipartFile upvideo)  {
-        String fileName=fileUtil.upFileMethod(upvideo);
+    public String uploadVideo(@RequestParam("upvideo") MultipartFile upvideo) {
+        String fileName = fileUtil.upFileMethod(upvideo);
         //return "../../upload/"+fileName;
-        return "/"+fileName;
+        return fileName;
+    }
+
+    /*修改更新文章*/
+    @PutMapping(value = "/updateArticle")
+    public Msg updateArticle(@RequestBody Note note) {
+        if (noteService.updateArticle(note) != 0) {
+            return Msg.success();
+        } else {
+            return Msg.fail();
+        }
+    }
+
+    @DeleteMapping(value = "/delete", produces = {"application/json;charset=UTF-8"})
+    public Msg delete(@RequestBody Map<String, Integer[]> map) {
+        Integer[] ids = map.get("articleIds");
+        if (noteService.deleteByKeys(ids)) {
+            return Msg.success();
+        } else {
+            return Msg.fail();
+        }
+    }
+
+    //发布
+    @PutMapping(value = "/public", produces = {"application/json;charset=UTF-8"})
+    public Msg publicStatus(@RequestBody Map<String, Integer[]> map) {
+        Integer[] ids = map.get("articleIds");
+        if (noteService.updatePublic(ids, 1)) {
+            return Msg.success();
+        } else {
+            return Msg.fail();
+        }
+    }
+
+    //撤销发布
+    @PutMapping(value = "/unpublic", produces = {"application/json;charset=UTF-8"})
+    public Msg unpublic(@RequestBody Map<String, Integer[]> map) {
+        Integer[] ids = map.get("articleIds");
+        if (noteService.updatePublic(ids, 0)) {
+            return Msg.success();
+        } else {
+            return Msg.fail();
+        }
+    }
+
+    @GetMapping(value = "/getArticleByStatus/{status}")
+    public Msg getArticleByStatus(@PathVariable("status") Integer status) {
+        List<Note> graphics = null;
+        if (status == -1) {
+            graphics = noteService.getAllArticle();
+        } else {
+            graphics = noteService.getArticleByStatus(status);
+        }
+
+        return Msg.success().add("graphicsList", graphics);
+    }
+    //根据标题搜索
+    @GetMapping("/getArticleBySearch/{title}")
+    public Msg getArticleBySearch(@PathVariable("title") String title){
+        List<Note> graphics=noteService.getArticleBySearch(title);
+        return Msg.success().add("graphicsList",graphics);
     }
 }
