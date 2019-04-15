@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("degradeApi")
+@RequestMapping("/degradeApi")
 public class VideoController {
     @Autowired
     private VideoClientService videoClientService;
@@ -35,14 +35,20 @@ public class VideoController {
         return videoClientService.insertVideo(video);
     }
     //按时间获取最新视频
-    @GetMapping(value = "getLastVideo")
+    @GetMapping(value = "/getLastVideo")
     public Msg getLastVideo(){
         return videoClientService.getLastVideo();
     }
     //按播放量获取最热视频
-    @GetMapping(value = "getHotVideo")
+    @GetMapping(value = "/getHotVideo")
     public Msg getHotVideo(){
         return videoClientService.getHotVideo();
+    }
+
+    //获取所有视频
+    @GetMapping(value = "/getVideo")
+    public Msg getVideo(){
+        return videoClientService.getVideo();
     }
 
 }

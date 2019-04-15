@@ -20,10 +20,10 @@ layui.config({
 				if(data.code == 100) {
                     //window.sessionStorage.setItem("userName",data.extend.username);
                     //创建一个cookie存放用户名
-                    $.cookie('username', data.extend.username, { expires: 1, path: '/' });
+                    $.cookie('username', data.extend.username, { expires: 1, path: '/consumer' });
                     layer.msg(data.extend.info);
                     setTimeout(function () {
-                        window.location.href = '/index.html';
+                        window.location.href = zuulUrlPage+'/index.html';
                     },1000)
 				} else {
                     layer.msg(data.extend.info);

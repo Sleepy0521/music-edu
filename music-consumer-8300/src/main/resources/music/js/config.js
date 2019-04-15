@@ -5,7 +5,7 @@ var config = {
     //前端接口地址
     serverUrl: window.location.protocol + "//" + window.location.host+"/consumer/degradeApi",
     //路由接口地址
-    zuulUrl: "http:" + "//" + "127.0.0.1:8600",
+    zuulUrl: window.location.protocol + "//" + window.location.host,
     //接口应用
     serverApp: 'pasture-api'
 
@@ -15,6 +15,8 @@ var config = {
 var serverUrl = config.serverUrl;
 var zuulUrl=config.zuulUrl;
 var zuulUrlFile=config.zuulUrl+"/api/music/download/";
+//前端路由页面地址
+var zuulUrlPage=zuulUrl+"/consumer";
 // 接口地址
 var serverApp = config.serverApp;
 

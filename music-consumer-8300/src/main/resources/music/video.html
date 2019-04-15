@@ -8,6 +8,8 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!--jquery cookie文件-->
     <script src="./js/jquery.cookie-1.4.1.js"></script>
+    <!--config.js-->
+    <script type="text/javascript" src="./js/config.js"></script>
     <!--页面头初始化的公共方法-->
     <script type="text/javascript" src="./page/component/initPage.js"></script>
 
@@ -21,8 +23,8 @@
     <div class="wrap">
         <div class="content_top">
             <div class="events">
-                <h2>Upcomming Events</h2>
-                <div class="section group">
+                <h2>全站视频</h2>
+                <!--<div class="section group">
                     <div class="grid_1_of_3 events_1_of_3">
                         <div class="event-time">
                             <h4><span>sed quia non numqua</span></h4>
@@ -50,6 +52,7 @@
                             <a href="article.html"><img src="images/event-img3.jpg" alt=""><span>Read More</span></a>
                         </div>
                     </div>
+
                 </div>
                 <div class="section group">
                     <div class="grid_1_of_3 events_1_of_3">
@@ -79,7 +82,7 @@
                             <a href="article.html"><img src="images/event-img6.jpg" alt=""><span>Read More</span></a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
@@ -93,6 +96,8 @@
     $(function () {
         //initPage中添加静态header和footer
         addHeaderAndFooter();
+        //加载视频列表
+        initVideo();
     });
 
     //当所有文档和页面都加载完毕后绑定header的事件和显示
@@ -100,6 +105,55 @@
         //initPage中为header绑定事件
         initHeader("menuVideo");
     };
+
+    //获取视频列表并且视频视频
+    function initVideo() {
+
+        $.ajax({
+            url: serverUrl + "/getVideo",
+            type: "get",
+            //服务器返回相应的内容格式
+            dataType: 'json',
+            //请求成功后的回调函数
+            success: function (data) {
+                if (data.code == 100) {
+                    adapterVideo(data.extend.videos)
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
+    }
+
+    //适配视频数据
+    function adapterVideo(vidos) {
+        $.each(vidos, function (i, item) {
+            //构造一个内容
+            var $content = $(
+                '<div class="grid_1_of_3 events_1_of_3">' +
+                    '<div class="event-time">' +
+                        '<h4><span>'+item.title+'</span></h4>' +
+                        '<h4>'+timestampToTime(item.updateTime)+'</h4>' +
+                    '</div>' +
+                    '<div class="event-img">' +
+                        '<a target="_blank" href="'+zuulUrlFile+item.url+'"><img src="'+zuulUrlFile+item.png+'" alt=""><span>Show</span></a>' +
+                    '</div>' +
+                '</div>'
+            );
+            var groupId = parseInt(i / 3);
+            var realGroupId = "group" + groupId;
+            if (i % 3 == 0) {
+                var $group = $('<div class="section group" </div>');
+                $group.attr("id", realGroupId);
+                $group.append($content);
+                $('.events').append($group)
+            } else {
+                $('#' + realGroupId).append($content);
+            }
+
+        })
+    }
 </script>
 </body>
 </html>

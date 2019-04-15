@@ -8,6 +8,8 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!--jquery cookie文件-->
     <script src="./js/jquery.cookie-1.4.1.js"></script>
+    <!--config.js-->
+    <script type="text/javascript" src="./js/config.js"></script>
     <!--页面头初始化的公共方法-->
     <script type="text/javascript" src="./page/component/initPage.js"></script>
 </head>
@@ -21,8 +23,8 @@
     <div class="wrap">
         <div class="content_top">
             <div class="blog">
-                <h2>Blogs</h2>
-                <div class="blog-leftgrids">
+                <h2>全站文章</h2>
+                <!--<div class="blog-leftgrids">
                     <div class="image group">
                         <div class="grid images_3_of_1">
                             <a href="#"><img src="images/blog-img2.jpg" alt=""></a>
@@ -75,8 +77,9 @@
                             <a href="#" class="button">Read More</a>
                         </div>
                     </div>
-                </div>
-                <div class="content-pagenation">
+                </div>-->
+                <!--分页-->
+                <!--<div class="content-pagenation">
                     <li><a href="#">Frist</a></li>
                     <li class="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
@@ -84,7 +87,7 @@
                     <li><span>....</span></li>
                     <li><a href="#">Last</a></li>
                     <div class="clear"></div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
@@ -98,6 +101,8 @@
     $(function () {
         //initPage中添加静态header和footer
         addHeaderAndFooter();
+        //初始化文章
+        initArticle();
     });
 
     //当所有文档和页面都加载完毕后绑定header的事件和显示
@@ -105,6 +110,65 @@
         //initPage中为header绑定事件
         initHeader("menuArticle");
     };
+
+    //初始化文章
+    function initArticle() {
+        $.ajax({
+            url: serverUrl + "/getNote",
+            type: "get",
+            //服务器返回相应的内容格式
+            dataType: 'json',
+            //请求成功后的回调函数
+            success: function (data) {
+                if (data.code == 100) {
+                    adapterArticle(data.extend.notes)
+                } else {
+                   console.log("该页面获取数据失败");
+                }
+            }
+        });
+    }
+
+
+    /*
+    *
+    *           <div class="blog-leftgrids">
+                    <div class="image group">
+                        <div class="grid images_3_of_1">
+                            <a href="#"><img src="images/blog-img2.jpg" alt=""></a>
+                        </div>
+                        <div class="grid blog-desc">
+                            <h4><span>Duis aute irure dolor cillum dolore</span></h4>
+                            <h4>Sep 14TH, 2013,&nbsp;&nbsp; posted By <a href="#" class="post">Lorem ipsum</a></h4>
+                            <p>Lanim id es</p>
+                            <a href="./page/article/articleDetail.html" class="button">Read More</a>
+                        </div>
+                    </div>
+                </div>
+    * */
+
+    function adapterArticle(notes) {
+        $.each(notes, function (i, item) {
+            //构造一个内容
+            var $content = $(
+                '<div class="blog-leftgrids">' +
+                    '<div class="image group">' +
+                        '<div class="grid images_3_of_1">'+
+                            '<a href="#"><img src="'+zuulUrlFile+item.icon+'" alt=""></a>' +
+                        '</div>' +
+                        '<div class="grid blog-desc">'+
+                            '<h4><span>'+item.title+'</span></h4>'+
+                            '<h4>'+timestampToTime(item.updateTime)+',&nbsp;&nbsp; posted By <a href="#" class="post">'+item.author+'</a></h4>'+
+                            '<p>'+item.brief+'</p>'+
+                            '<a target="_blank" href="'+zuulUrlPage+'/page/article/articleDetail.html" class="button">Read More</a>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'
+            );
+            $('.blog').append($content)
+
+        });
+    }
 </script>
 </body>
 </html>

@@ -19,15 +19,15 @@ function initHeader(highMenu){
     //登出功能的绑定
     $('#logout').click(function () {
         $.cookie('username', '');
-        window.location.href="/index.html"
+        window.location.href=zuulUrlPage+"/index.html"
     });
 }
 function addHeaderAndFooter() {
     //加载header
-    $('.header_top').load("/consumer/page/component/header.html");
+    $('.header_top').load(zuulUrlPage+"/page/component/header.html");
     //加载footer
-    $('.footer').load("/consumer/page/component/footer.html");
-    $('.copy').load("/consumer/page/component/link.html");
+    $('.footer').load(zuulUrlPage+"/page/component/footer.html");
+    $('.copy').load(zuulUrlPage+"/page/component/link.html");
 
    /* var msgSuccess = {};
     msgSuccess.dialog1 = jqueryAlert({
@@ -39,4 +39,15 @@ function addHeaderAndFooter() {
         'content': '处理失败',
         'closeTime': 2000,
     });*/
+}
+//前端时间戳格式化
+function timestampToTime(timestamp) {
+    var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    var D = date.getDate() + ' ';
+    var h = date.getHours() + ':';
+    var m = date.getMinutes() + ':';
+    var s = date.getSeconds();
+    return Y + M + D+h+m+s;
 }

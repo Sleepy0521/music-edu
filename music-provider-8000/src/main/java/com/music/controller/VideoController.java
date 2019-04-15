@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -55,6 +56,12 @@ public class VideoController {
     public Msg getHotVideo(){
         Video hotVideo=videoService.getHotVideo();
         return Msg.success().add("hotVideo",hotVideo);
+    }
+    //按播放量获取最热视频
+    @GetMapping(value = "getVideo")
+    public Msg getVideo(){
+        List<Video> videos=videoService.getVideo();
+        return Msg.success().add("videos",videos);
     }
 
 

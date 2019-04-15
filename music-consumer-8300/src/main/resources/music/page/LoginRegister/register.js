@@ -23,12 +23,12 @@ layui.config({
                     $.cookie('username', data.extend.username, { expires: 1, path: '/' });
                     layer.msg("注册成功");
                     setTimeout(function () {
-                        window.location.href = '/index.html';
+                        window.location.href =zuulUrlPage+'/index.html';
                     },1000)
 
 				} else {
                     layer.msg("注册失败");
-                    window.location.href = '/page/LoginRegister/register.html';
+                    window.location.href = zuulUrlPage+'/page/LoginRegister/register.html';
 				}
 			}
 
