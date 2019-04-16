@@ -51,3 +51,20 @@ function timestampToTime(timestamp) {
     var s = date.getSeconds();
     return Y + M + D+h+m+s;
 }
+//?后的参数获取
+function getPara(key) {
+    //获取到连接后面的参数比如id=1&name=fff
+    var urlParaStr=window.location.href.split("?")[1];
+    //将上述字符串分割得到[id=1,name=fff]
+    var paraArr=urlParaStr.split("&");
+    //遍历该数组
+    var result="";
+    $.each(paraArr,function (i,item) {
+        //按照“=”号分割变成[id,1]
+        var arr=item.split("=");
+        if(arr[0]==key){
+            result=arr[1];
+        }
+    });
+    return result;
+}

@@ -15,6 +15,11 @@ public class NoteClientServiceFallbackFactory implements FallbackFactory<NoteCli
             public Msg getNote() {
                 return Msg.fail().add("info","未能成功调取到provider提供的接口，这是服务降级返回的信息--NoteController");
             }
+
+            @Override
+            public Msg getArticleById(Integer id) {
+                return Msg.fail().add("info","未能成功调取到provider提供的接口，这是服务降级返回的信息--NoteController");
+            }
         };
     }
 }

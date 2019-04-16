@@ -355,6 +355,15 @@ layui.config({
         var pos = file.lastIndexOf("/");
         return file.substring(pos + 1);
     }
+    //替换ueditor默认的路径 将路径只换成文件名字
+    function replaceSrc(lable) {
+        $.each($("#txt").find(lable), function () {
+            //真实图片访问地址
+            var lableSrc = $(this).attr('src');
+            //存入数据库中的地址
+            $(this).attr('src', getFileName2(lableSrc));
+        });
+    }
 
     //新增文章
     $("#save").click(function () {
@@ -363,12 +372,15 @@ layui.config({
             txt = UM.getEditor('myEditor').getContent();
             $("#txt").html(txt);
 
-            $.each($("#txt").find('img'), function () {
+           /* $.each($("#txt").find('img'), function () {
                 //真实图片访问地址
                 var imgsrc = $(this).attr('src');
                 //存入数据库中的地址
                 $(this).attr('src', getFileName2(imgsrc));
-            });
+            });*/
+            replaceSrc('img');
+            replaceSrc('video');
+
             txt = $('#txt').html();
             $("#txt").empty();
         });

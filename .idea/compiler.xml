@@ -12,6 +12,7 @@
         <module name="music-consumer-8300" />
         <module name="music-dashboard-9000" />
         <module name="music-eureka-7000" />
+        <module name="music-fileserver-8020" />
         <module name="music-provider-8000" />
         <module name="music-zuul-8600" />
       </profile>

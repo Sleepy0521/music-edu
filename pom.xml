@@ -18,6 +18,7 @@
         <module>music-dashboard-9000</module>
         <module>music-zuul-8600</module>
         <module>music-adminManage-8010</module>
+        <module>music-fileserver-8020</module>
     </modules>
     <packaging>pom</packaging>
     <name>music-edu</name>

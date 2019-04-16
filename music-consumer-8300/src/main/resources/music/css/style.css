@@ -825,6 +825,9 @@ body {
     font-family: 'caviar_dreamsregular';
     padding: 0 0 25px 25px;;
 }
+.blog p,h3,h4,h5,h6{
+    color: #FFF;
+}
 
 .image {
     clear: both;

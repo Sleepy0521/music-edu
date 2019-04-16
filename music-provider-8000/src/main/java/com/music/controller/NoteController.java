@@ -6,6 +6,7 @@ import com.music.service.NoteService;
 import com.music.utils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,11 @@ public class NoteController {
     public Msg getNote(){
         List<Note> notes=noteService.getNote();
         return Msg.success().add("notes",notes);
+    }
+
+    @GetMapping(value = "/getArticleById/{id}")
+    public Msg getNote(@PathVariable("id") Integer id){
+        Note note=noteService.getArticleById(id);
+        return Msg.success().add("note",note);
     }
 }

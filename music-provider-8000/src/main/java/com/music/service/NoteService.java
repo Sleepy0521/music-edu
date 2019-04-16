@@ -14,6 +14,14 @@ public class NoteService {
     private NoteMapper noteMapper;
 
     public List<Note> getNote() {
-        return noteMapper.selectByExample(new NoteExample());
+        NoteExample noteExample = new NoteExample();
+        noteExample.or().andStatusEqualTo(1);
+        return noteMapper.selectByExample(noteExample);
+    }
+
+    public Note getArticleById(Integer id) {
+        NoteExample noteExample = new NoteExample();
+        noteExample.or().andIdEqualTo(id);
+        return noteMapper.selectByExample(noteExample).get(0);
     }
 }
