@@ -8,20 +8,6 @@ import javax.servlet.MultipartConfigElement;
 
 @Configuration
 public class UploadFileConfig {
-	
-	/*@Value("${file.uploadFolder}")
-    private String uploadFolder;*/
-
-/*    @Bean
-    MultipartConfigElement multipartConfigElement() {
-        MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setLocation(uploadFolder);
-        //文件最大
-//        factory.setMaxFileSize("20");
-        // 设置总上传数据总大小
-//        factory.setMaxRequestSize("10MB");
-        return factory.createMultipartConfig();
-    }*/
     /**
      * 文件上传配置
      *
