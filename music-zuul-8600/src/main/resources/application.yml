@@ -29,13 +29,23 @@ zuul:
   #ignored-services: "*"
   #配置服务名和路径名对应关系
   routes:
-    provider.serviceId: music-provider
-    provider.path: /api/**
     consumer.serviceId: music-consumer
     consumer.path: /consumer/**
     adminManage.serviceId: music-adminManage
     adminManage.path: /admin/**
   servlet-path: /
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
 info:
   app.name: atguigu-microcloud
   company.name: www.atguigu.com

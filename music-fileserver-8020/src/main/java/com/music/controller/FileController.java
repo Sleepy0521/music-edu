@@ -54,7 +54,7 @@ public class FileController {
                 }
             }
         }
-
+        System.out.println("我他妹上传文件成功了");
         return  DateUtil.getCurrentDate()+"-"+fileName;
     }
 }

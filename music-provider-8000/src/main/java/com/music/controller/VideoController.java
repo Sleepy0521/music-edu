@@ -2,16 +2,14 @@ package com.music.controller;
 
 
 import com.music.entities.Video;
+import com.music.service.client.FileClientService;
 import com.music.service.VideoService;
 import com.music.file.FileUtil;
 import com.music.utils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,7 +19,8 @@ public class VideoController {
     private FileUtil fileUtil;
     @Autowired
     private VideoService videoService;
-
+    @Autowired
+    private FileClientService fileClientService;
 
     @GetMapping("/get")
     public Msg get(){
@@ -30,9 +29,16 @@ public class VideoController {
 
 
     //视频文件上传
-    @PostMapping("/uploadVideo")
+    /*@PostMapping("/uploadVideo")
     public Msg uploadVideo(@RequestParam("file") MultipartFile file)  {
         String fileName = fileUtil.upFileMethod(file);
+        String imgName=fileUtil.creatImg(fileName);
+        return Msg.success().add("videoName",fileName).add("imgName",imgName);
+    }*/
+    @PostMapping("/uploadVideo")
+    public Msg uploadVideo(@RequestParam("file") MultipartFile file)  {
+        String fileName = fileClientService.uploadFile(file);
+        //String fileName =fileUtil.upFileMethod(file);
         String imgName=fileUtil.creatImg(fileName);
         return Msg.success().add("videoName",fileName).add("imgName",imgName);
     }

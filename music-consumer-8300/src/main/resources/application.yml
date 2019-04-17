@@ -14,9 +14,16 @@ feign:
     command:
       default:
         execution:
+          #使用这个配置后isolation的超时配置可以去掉
+          #timeout:
+            #enable: false
           isolation:
             thread:
-              timeoutInMilliseconds: 10000
+              timeoutInMilliseconds: 60000
+  ribbon:
+    #ribbon的超时时间一定要比hystix的小不然会一直触发ribbon的重试机制
+    ReadTimeout: 60000
+    ConnectTimeout: 60000
 
 eureka:
   client:

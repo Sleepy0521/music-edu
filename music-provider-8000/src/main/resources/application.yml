@@ -44,7 +44,20 @@ file:
   #正式环境目录(实际物理地址)
   uploadFolder: /home/sleepy/music/uploadFolder/
 
-
+feign:
+  hystrix:
+    enabled: true
+    #设置hystrix超时时间
+    command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 60000
+  ribbon:
+    #ribbon的超时时间一定要比hystix的小不然会一直触发ribbon的重试机制
+    ReadTimeout: 60000
+    ConnectTimeout: 60000
 
 eureka:
   client: #客户端注册进eureka服务列表内
