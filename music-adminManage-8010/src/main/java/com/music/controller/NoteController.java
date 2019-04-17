@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.music.entities.Note;
 import com.music.file.FileUtil;
 import com.music.service.NoteService;
+import com.music.service.client.FileClientService;
 import com.music.utils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,8 @@ import java.util.Map;
 public class NoteController {
     @Autowired
     NoteService noteService;
-
+    @Autowired
+    private FileClientService fileClientService;
     @Autowired
     FileUtil fileUtil;
 
@@ -33,10 +35,10 @@ public class NoteController {
             return Msg.fail();
         }
     }
-
+    //icon图片上传
     @PostMapping(value = "/pngUpload")
     public Msg pngUPload(@RequestParam("file") MultipartFile file, String fileName) {
-        String imgSrc = fileUtil.upFileMethod(file, fileName);
+        String imgSrc = fileClientService.uploadFile(file);
         if (imgSrc != null && !imgSrc.isEmpty()) {
             return Msg.success().add("imgSrc", imgSrc);
         } else {
@@ -46,8 +48,8 @@ public class NoteController {
 
     //ueditor图片上传
     @PostMapping(value = "/fileUpload2")
-    public String fileUpload2(@RequestParam("upfile") MultipartFile file) {
-        String fileName = fileUtil.upFileMethod(file);
+    public String fileUpload2(@RequestParam("file") MultipartFile file) {
+        String fileName = fileClientService.uploadFile(file);
         Map<String, Object> result = new HashMap<String, Object>();
 
         result.put("url", fileName);// 展示图片的请求url
@@ -55,7 +57,13 @@ public class NoteController {
         String jStr = JSON.toJSONString(result);
         return jStr;
     }
-
+    //ueditor视频上传
+    @PostMapping("/uploadVideo")
+    public String uploadVideo(@RequestParam("file") MultipartFile file) {
+        String fileName = fileClientService.uploadFile(file);
+        //return "../../upload/"+fileName;
+        return fileName;
+    }
     //获取所有文章信息
     @GetMapping(value = "/getAllArticle")
     public Msg getAllArticle() {
@@ -69,13 +77,7 @@ public class NoteController {
         return Msg.success().add("article", note);
     }
 
-    //ueditor视频上传
-    @PostMapping("/uploadVideo")
-    public String uploadVideo(@RequestParam("upvideo") MultipartFile upvideo) {
-        String fileName = fileUtil.upFileMethod(upvideo);
-        //return "../../upload/"+fileName;
-        return fileName;
-    }
+
 
     /*修改更新文章*/
     @PutMapping(value = "/updateArticle")

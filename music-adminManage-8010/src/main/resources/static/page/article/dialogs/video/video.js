@@ -40,7 +40,7 @@
         "</div>" +
         "<div id=\"eduiVideoTabBodys\" class=\"edui-video-tabbody\">" +
         "<div id=\"eduiVideoPanel\" class=\"edui-video-panel\">" +
-        "<table><tr><td><label for=\"eduiVideoUrl\" class=\"edui-video-url\"><%=lang_video_url%></label></td><td><form><input type=\"file\" id=\"umeditorUploadId\" class=\"file-input\" name=\"upvideo\"></form> </td><td> <input style=\"display: none;\" id=\"eduiVideoUrl\" type=\"text\">  </td></tr></table>" +
+        "<table><tr><td><label for=\"eduiVideoUrl\" class=\"edui-video-url\"><%=lang_video_url%></label></td><td><form><input type=\"file\" id=\"umeditorUploadId\" class=\"file-input\" name=\"file\"></form> </td><td> <input style=\"display: none;\" id=\"eduiVideoUrl\" type=\"text\">  </td></tr></table>" +
         "<div id=\"eduiVideoPreview\"></div>" +
         "<div id=\"eduiVideoInfo\">" +
         "<fieldset>" +

@@ -7,23 +7,27 @@ spring:
 # web静态页面路径
 spring.resources.static-locations: classpath:/music/
 
-feign:
-  hystrix:
-    enabled: true
-    #设置hystrix超时时间
-    command:
-      default:
-        execution:
-          #使用这个配置后isolation的超时配置可以去掉
-          #timeout:
-            #enable: false
-          isolation:
-            thread:
-              timeoutInMilliseconds: 60000
-  ribbon:
-    #ribbon的超时时间一定要比hystix的小不然会一直触发ribbon的重试机制
-    ReadTimeout: 60000
-    ConnectTimeout: 60000
+file:
+  #静态资源对外暴露的访问路径
+  staticAccessPath: /music/download/**
+  #文件上传目录(实际物理地址)
+  #uploadFolder: c:/PoliceChangPing/uploadFolder/
+  #正式环境目录(实际物理地址)
+  uploadFolder: /home/sleepy/music/uploadFolder/
+
+hystrix:
+  enabled: true
+  #设置hystrix超时时间
+  command:
+    default:
+      execution:
+        #使用这个配置后isolation的超时配置可以去掉
+        timeout:
+          enable: false
+ribbon:
+  #ribbon的超时时间一定要比hystix的小不然会一直触发ribbon的重试机制
+  ReadTimeout: 80000
+  ConnectTimeout: 80000
 
 eureka:
   client:

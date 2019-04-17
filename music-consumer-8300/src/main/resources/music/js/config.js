@@ -14,9 +14,10 @@ var config = {
 // 接口地址
 var serverUrl = config.serverUrl;
 var zuulUrl=config.zuulUrl;
-var zuulUrlFile=config.zuulUrl+"/api/music/download/";
 //前端路由页面地址
 var zuulUrlPage=zuulUrl+"/consumer";
+var zuulUrlFile=zuulUrlPage+"/music/download/";
+
 // 接口地址
 var serverApp = config.serverApp;
 
