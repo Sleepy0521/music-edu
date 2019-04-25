@@ -6,6 +6,7 @@ import com.music.service.client.FileClientService;
 import com.music.service.VideoService;
 import com.music.file.FileUtil;
 import com.music.utils.Msg;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -53,6 +54,7 @@ public class VideoController {
     }
     //按时间获取最新视频
     @GetMapping(value = "getLastVideo")
+    @HystrixCommand
     public Msg getLastVideo(){
         Video lastVideo=videoService.getLastVideo();
         return Msg.success().add("lastVideo",lastVideo);

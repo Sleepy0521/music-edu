@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api")
-@FeignClient(name = "music-provider")/*,fallbackFactory = VideoClientServiceFallbackFactory.class*/
+@FeignClient(name = "music-provider",fallbackFactory = VideoClientServiceFallbackFactory.class)/**/
 public interface VideoClientService {
 
     @GetMapping(value = "/get")

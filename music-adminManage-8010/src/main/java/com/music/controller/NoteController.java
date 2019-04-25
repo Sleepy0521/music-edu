@@ -2,7 +2,6 @@ package com.music.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.music.entities.Note;
-import com.music.file.FileUtil;
 import com.music.service.NoteService;
 import com.music.service.client.FileClientService;
 import com.music.utils.Msg;
@@ -24,8 +23,6 @@ public class NoteController {
     NoteService noteService;
     @Autowired
     private FileClientService fileClientService;
-    @Autowired
-    FileUtil fileUtil;
 
     @PostMapping(value = "/insertArticle", produces = "application/json;charset=UTF-8")
     public Msg insertArticle(@RequestBody Note note) {

@@ -1,6 +1,5 @@
 package com.music.service;
 
-import com.music.service.impl.ImgClientServiceFallbackFactory;
 import com.music.service.impl.NoteClientServiceFallbackFactory;
 import com.music.utils.Msg;
 import org.springframework.cloud.netflix.feign.FeignClient;

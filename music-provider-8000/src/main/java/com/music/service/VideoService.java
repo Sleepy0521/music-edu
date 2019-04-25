@@ -5,6 +5,8 @@ import com.music.dao.VideoMapper;
 import com.music.entities.Video;
 import com.music.entities.VideoExample;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -33,8 +35,9 @@ public class VideoService {
         List<Video> videos = videoMapper.selectByExample(videoExample);
         return videos.get(0);
     }
-
+    
     public List<Video> getVideo() {
         return videoMapper.selectByExample(new VideoExample());
     }
+
 }
