@@ -26,5 +26,25 @@
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
     </dependencies>
-
+    <build>
+        <!--打成jar包后的名字-->
+        <finalName>Eureka-7000</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--这里写上main方法所在类的路径-->
+                    <mainClass>com.music.Eureka7000</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

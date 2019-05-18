@@ -20,7 +20,7 @@ eureka:
   instance:
     instance-id: zuul-8600
     prefer-ip-address: true
-    hostname: localhost
+    hostname: www.music.com
 
 
 zuul:
@@ -36,27 +36,23 @@ zuul:
     dashBoard.serviceId: music-dashboard
     dashBoard.path: /dashboard/**
   servlet-path: /
-feign:
-  hystrix:
-    command:
-      default:
-        fallback:
-          enabled: false
-        execution:
-          timeout:
-            enabled: false
-          isolation:
-            strategy: THREAD
-            thread:
-              timeoutInMilliseconds: 60000
-    threadpool:
-      default:
-        coreSize: 20
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 600000
+  threadpool:
+    default:
+      coreSize: 20
 
 
 ribbon:
-  ReadTimeout: 60000
-  ConnectTimeout: 60000
+  ReadTimeout: 600000
+  ConnectTimeout: 600000
 
 info:
   app.name: atguigu-microcloud

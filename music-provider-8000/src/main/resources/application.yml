@@ -8,7 +8,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://127.0.0.1:3306/music?useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://www.music.com:3307/music?useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8
     driver-class-name:  com.mysql.cj.jdbc.Driver
     #指定数据源
     type: com.alibaba.druid.pool.DruidDataSource
@@ -44,20 +44,22 @@ file:
   #正式环境目录(实际物理地址)
   uploadFolder: /home/sleepy/music/uploadFolder/
 
-feign:
-  hystrix:
-    enabled: true
-    #设置hystrix超时时间
-    command:
-      default:
-        execution:
-          #使用这个配置后isolation的超时配置可以去掉
-          timeout:
-            enable: false
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 600000
+  threadpool:
+    default:
+      coreSize: 20
+
+
 ribbon:
-  #ribbon的超时时间一定要比hystix的小不然会一直触发ribbon的重试机制
-  ReadTimeout: 80000
-  ConnectTimeout: 80000
+  ReadTimeout: 600000
+  ConnectTimeout: 600000
 
 eureka:
   client: #客户端注册进eureka服务列表内
@@ -66,7 +68,7 @@ eureka:
       #defaultZone: http://${eureka.instance.hostname}:7000/eureka/,http://${eureka.instance.hostname}:7001/eureka/,http://${eureka.instance.hostname}:7002/eureka/
       #defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
   instance:
-    hostname: localhost #eureka服务端的实例名称
+    hostname: www.music.com #eureka服务端的实例名称
     instance-id: provier-8000
     prefer-ip-address: true     #访问路径可以显示IP地址
 

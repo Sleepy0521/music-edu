@@ -14,20 +14,22 @@ file:
   #uploadFolder: c:/PoliceChangPing/uploadFolder/
   #正式环境目录(实际物理地址)
   uploadFolder: /home/sleepy/music/uploadFolder/
-feign:
-  hystrix:
-    enabled: true
-    #设置hystrix超时时间
-    command:
-      default:
-        execution:
-          #使用这个配置后isolation的超时配置可以去掉
-          timeout:
-            enable: false
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 600000
+  threadpool:
+    default:
+      coreSize: 20
+
+
 ribbon:
-  #ribbon的超时时间一定要比hystix的小不然会一直触发ribbon的重试机制
-  ReadTimeout: 80000
-  ConnectTimeout: 80000
+  ReadTimeout: 600000
+  ConnectTimeout: 600000
 
 eureka:
   client:
@@ -39,6 +41,6 @@ eureka:
   instance:
     instance-id: consumer-8300
     prefer-ip-address: true     #访问路径可以显示IP地址
-    hostname: localhost
+    hostname: www.music.com
 
 

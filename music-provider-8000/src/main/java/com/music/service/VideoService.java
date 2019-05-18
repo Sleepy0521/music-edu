@@ -39,5 +39,4 @@ public class VideoService {
     public List<Video> getVideo() {
         return videoMapper.selectByExample(new VideoExample());
     }
-
 }
